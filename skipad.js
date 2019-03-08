@@ -12,7 +12,7 @@
     if (window.location.pathname !== '/watch') {
       return;
     }
-    var skipButton = document.getElementsByClassName('ytp-ad-skip-button')[0];
+    var skipButton = getButton(document.getElementsByTagName('button'));
     if (skipButton) {
       eventFire(skipButton, 'click');
     }
@@ -29,6 +29,14 @@
       var evObj = document.createEvent('Events');
       evObj.initEvent(etype, true, false);
       el.dispatchEvent(evObj);
+    }
+  }
+
+  function getButton(buttons){
+    for(var i=0; i<buttons.length; i++){
+      if(buttons[i].className.includes('ytp-ad-skip-button') && buttons[i].className.includes('ytp-ad-skip-button ytp-button')){
+        return buttons[i];
+      }
     }
   }
 
